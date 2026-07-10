@@ -1,0 +1,72 @@
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button class="arena-fab" (click)="openSheet()">
+    <ion-icon name="game-controller"></ion-icon>
+    Arena ({{ onlineCount }})
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal [isOpen]="isOpen()" (didDismiss)="isOpen.set(false)">
+  <ng-template>
+    <ion-content class="arena-sheet">
+      <div class="arena-header">
+        <h2>Arena PvP</h2>
+        <button type="button" class="close-btn" (click)="isOpen.set(false)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+
+      <ion-segment [value]="activeTab()" (ionChange)="activeTab.set($any($event.detail.value))">
+        <ion-segment-button value="arena"><ion-label>Arena</ion-label></ion-segment-button>
+        <ion-segment-button value="friends"><ion-label>Amigos</ion-label></ion-segment-button>
+        <ion-segment-button value="social"><ion-label>Social</ion-label></ion-segment-button>
+      </ion-segment>
+
+      @if (isLoading()) {
+        <div class="loading"><ion-spinner name="crescent"></ion-spinner></div>
+      } @else {
+        @switch (activeTab()) {
+          @case ('arena') {
+            <div class="player-list">
+              @for (player of onlinePlayers(); track player.id) {
+                <div class="player-row">
+                  <img [src]="player.avatarUrl" alt="" class="player-avatar" />
+                  <div class="player-info">
+                    <span class="player-name">{{ player.fullName }}</span>
+                    <span class="player-status" [class]="'status--' + player.status">{{ player.status }}</span>
+                  </div>
+                  @if (player.status === 'online') {
+                    <app-tactile-button text="Retar" [height]="36" (tapped)="challenge(player)" />
+                  }
+                </div>
+              }
+            </div>
+          }
+          @case ('friends') {
+            <div class="player-list">
+              @for (friend of friends(); track friend.id) {
+                <div class="player-row">
+                  <img [src]="friend.avatarUrl" alt="" class="player-avatar" />
+                  <span class="player-name">{{ friend.fullName }}</span>
+                </div>
+              }
+            </div>
+          }
+          @case ('social') {
+            <div class="player-list">
+              @for (req of requests(); track req.id) {
+                <div class="player-row">
+                  <img [src]="req.fromAvatar" alt="" class="player-avatar" />
+                  <span class="player-name">{{ req.fromName }}</span>
+                  <span class="request-badge">Solicitud pendiente</span>
+                </div>
+              }
+              @if (requests().length === 0) {
+                <p class="empty-text">No hay solicitudes pendientes</p>
+              }
+            </div>
+          }
+        }
+      }
+    </ion-content>
+  </ng-template>
+</ion-modal>

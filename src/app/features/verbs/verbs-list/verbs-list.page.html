@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar class="verbs-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <div class="toolbar-title">{{ title() }}</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="verbs-content">
+  <div class="verbs-wrapper">
+    <ion-searchbar
+      placeholder="Buscar verbo..."
+      (ionInput)="onSearch($event)"
+      class="search-bar"
+    />
+
+    <div class="sublevel-selector">
+      @for (n of [1,2,3,4,5,6]; track n) {
+        <button
+          type="button"
+          class="sublevel-pill"
+          [class.sublevel-pill--selected]="selectedSublevel() === n"
+          [class.sublevel-pill--completed]="isSublevelCompleted(n)"
+          [class.sublevel-pill--locked]="!isSublevelUnlocked(n)"
+          (click)="selectSublevel(n)"
+        >
+          @if (!isSublevelUnlocked(n)) { 🔒 }
+          @else if (isSublevelCompleted(n)) { 🏆 }
+          @else { {{ n }} }
+        </button>
+      }
+    </div>
+
+    <app-tactile-button
+      [text]="'🎯 Practicar subnivel ' + selectedSublevel()"
+      [backgroundColor]="theme.secondary"
+      [darkColor]="theme.secondaryDark"
+      [textColor]="theme.onBackground"
+      (tapped)="startPractice()"
+    />
+
+    @if (isLoading()) {
+      <div class="loading"><ion-spinner name="crescent"></ion-spinner></div>
+    } @else {
+      <div class="verb-list">
+        @for (verb of filteredVerbs(); track verb.infinitive) {
+          <button type="button" class="verb-card" (click)="openVerbDetail(verb)">
+            <div class="verb-main">
+              <span class="verb-infinitive">{{ verb.infinitive }}</span>
+              <span class="verb-spanish">{{ verb.spanish }}</span>
+            </div>
+            <div class="verb-forms">
+              <span>{{ verb.pastSimple }}</span>
+              <span>{{ verb.pastParticiple }}</span>
+            </div>
+          </button>
+        }
+      </div>
+    }
+  </div>
+</ion-content>
+
+<ion-modal [isOpen]="showDetail()" (didDismiss)="showDetail.set(false)">
+  <ng-template>
+    @if (selectedVerb(); as v) {
+      <div class="verb-detail">
+        <div class="verb-detail__handle"></div>
+        <h2>{{ v.infinitive }}</h2>
+        <p class="verb-detail__spanish">{{ v.spanish }}</p>
+        <div class="conjugation-grid">
+          <div><label>Pasado simple</label><span>{{ v.pastSimple }}</span></div>
+          <div><label>Participio</label><span>{{ v.pastParticiple }}</span></div>
+          <div><label>Gerundio</label><span>{{ v.gerund }}</span></div>
+        </div>
+        <div class="example-box">
+          <p class="example-en">"{{ v.exampleEn }}"</p>
+          <p class="example-es">{{ v.exampleEs }}</p>
+        </div>
+        <app-tactile-button text="Cerrar" [isSecondary]="true" (tapped)="showDetail.set(false)" />
+      </div>
+    }
+  </ng-template>
+</ion-modal>

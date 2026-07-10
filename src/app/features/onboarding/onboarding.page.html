@@ -1,0 +1,79 @@
+<ion-content class="onboarding-content">
+  <div class="onboarding-wrapper">
+    <header class="onboarding-header">
+      <h1 class="brand">Miri verbs</h1>
+      <button type="button" class="skip-btn" (click)="skip()">Saltar</button>
+    </header>
+
+    <app-squishy-progress-bar [value]="progress" [barHeight]="14" />
+
+    <div class="slide-area">
+      @switch (currentPage()) {
+        @case (0) {
+          <div class="slide slide--center">
+            <img src="assets/images/mascot_happy.png" alt="Mascot" class="mascot" />
+            <h2 class="display">¡Domina los verbos!</h2>
+            <p class="body-text">
+              Aprende y practica verbos y frases en inglés de manera progresiva y divertida,
+              desde el nivel básico hasta el avanzado.
+            </p>
+          </div>
+        }
+        @case (1) {
+          <div class="slide slide--center">
+            <h2 class="display">Conoce Miri verbs 🎥</h2>
+            <p class="body-text">Mira cómo funciona nuestra metodología de aprendizaje.</p>
+            <button type="button" class="video-card" (click)="openVideo()">
+              <div class="video-card__overlay">
+                <ion-icon name="play-circle" class="video-card__play"></ion-icon>
+                <span>Ver presentación</span>
+              </div>
+            </button>
+          </div>
+        }
+        @case (2) {
+          <div class="slide slide--center">
+            <img src="assets/images/mascot_celebrating.png" alt="Celebrating" class="mascot" />
+            <h2 class="display">¡Aprende jugando! 🎮</h2>
+            <p class="body-text">
+              Gana rachas, desbloquea niveles y reta a tus amigos en duelos PvP en tiempo real.
+            </p>
+          </div>
+        }
+        @case (3) {
+          <div class="slide">
+            <h2 class="display">Tu meta diaria</h2>
+            <p class="body-text">¿Cuánto tiempo quieres practicar cada día?</p>
+            <div class="goals-list">
+              @for (goal of goals; track goal) {
+                <button
+                  type="button"
+                  class="goal-item"
+                  [class.goal-item--selected]="selectedGoal() === goal"
+                  (click)="selectGoal(goal)"
+                >
+                  <span class="goal-radio" [class.goal-radio--checked]="selectedGoal() === goal"></span>
+                  {{ goal }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <div class="dots">
+      @for (slide of slides; track slide.id; let i = $index) {
+        <span class="dot" [class.dot--active]="currentPage() === i"></span>
+      }
+    </div>
+
+    <app-tactile-button
+      [text]="currentPage() === 3 ? '¡Empezar ahora!' : 'Siguiente'"
+      [backgroundColor]="currentPage() === 3 ? theme.secondary : theme.primary"
+      [darkColor]="currentPage() === 3 ? theme.secondaryDark : theme.primaryDark"
+      [textColor]="currentPage() === 3 ? theme.onBackground : '#FFFFFF'"
+      (tapped)="next()"
+    />
+  </div>
+</ion-content>

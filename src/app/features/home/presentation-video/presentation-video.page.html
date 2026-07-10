@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar class="video-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="video-content">
+  <div class="video-wrapper">
+    <h1>Presentación Miri verbs</h1>
+    <div class="video-frame">
+      <iframe
+        [src]="videoUrl"
+        title="Presentación Miri verbs"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="method-card">
+      <h2>Nuestra metodología</h2>
+      <p>
+        Aprende verbos en inglés de forma progresiva con el marco CEFR (A1–C2).
+        Practica con quizzes interactivos, gana rachas y compite con amigos en duelos PvP.
+      </p>
+    </div>
+    <app-tactile-button
+      text="¡Entendido y listo!"
+      [backgroundColor]="theme.secondary"
+      [darkColor]="theme.secondaryDark"
+      [textColor]="theme.onBackground"
+      (tapped)="goBack()"
+    />
+  </div>
+</ion-content>

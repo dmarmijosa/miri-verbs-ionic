@@ -1,0 +1,102 @@
+.practice-toolbar { --background: #F6FAFE; }
+
+.practice-header-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-weight: 700;
+  .score { color: #FDD400; }
+}
+
+.practice-content { --background: #F6FAFE; }
+
+.practice-wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-banner {
+  background: #FFF3CD;
+  color: #856404;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.question-card {
+  background: white;
+  border: 1.5px solid #EAEEF2;
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border: 2px solid #EAEEF2;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.option-btn--selected { border-color: #0040E0; background: rgba(0, 64, 224, 0.05); }
+.option-btn--correct { border-color: #2ECC71; background: rgba(46, 204, 113, 0.1); }
+.option-btn--wrong { border-color: #BA1A1A; background: rgba(186, 26, 26, 0.1); }
+
+.option-radio {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid #C4C5D9;
+  flex-shrink: 0;
+}
+
+.option-btn--selected .option-radio {
+  border-color: #0040E0;
+  background: #0040E0;
+  box-shadow: inset 0 0 0 3px white;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 32px;
+  text-align: center;
+  gap: 12px;
+}
+
+.results-mascot { width: 160px; height: 160px; object-fit: contain; }
+
+.results h2 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+.results-hint { color: #434656; font-size: 14px; }

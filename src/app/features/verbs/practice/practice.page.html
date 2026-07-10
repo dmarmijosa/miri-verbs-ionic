@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="practice-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <div class="practice-header-info">
+      <span>{{ currentIndex() + 1 }}/{{ questions().length }}</span>
+      <span class="score">⭐ {{ firstAttemptScore() }}</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="practice-content">
+  @if (showResults()) {
+    <div class="results">
+      <img
+        [src]="passed() ? 'assets/images/mascot_celebrating.png' : 'assets/images/mascot_sad.png'"
+        alt="Result"
+        class="results-mascot"
+      />
+      <h2>{{ passed() ? '¡Nivel superado!' : 'Sigue practicando' }}</h2>
+      <p>Puntuación: {{ firstAttemptScore() }}/10 (primer intento)</p>
+      <p class="results-hint">{{ passed() ? 'Has desbloqueado el siguiente subnivel.' : 'Necesitas al menos 8/10 en el primer intento.' }}</p>
+      <app-tactile-button text="Volver" (tapped)="goBack()" />
+    </div>
+  } @else if (currentQuestion; as q) {
+    <div class="practice-wrapper">
+      <app-squishy-progress-bar [value]="progress" />
+
+      @if (q.isReview) {
+        <div class="review-banner">Repaso</div>
+      }
+
+      <div class="question-card">
+        <p class="question-text">{{ q.questionText }}</p>
+      </div>
+
+      <div class="options">
+        @for (option of q.options; track option) {
+          <button
+            type="button"
+            class="option-btn"
+            [class.option-btn--selected]="selectedOption() === option && !isAnswered()"
+            [class.option-btn--correct]="isCorrect(option)"
+            [class.option-btn--wrong]="isWrong(option)"
+            (click)="selectOption(option)"
+          >
+            <span class="option-radio"></span>
+            {{ option }}
+          </button>
+        }
+      </div>
+
+      <app-tactile-button
+        [text]="isAnswered() ? (currentIndex() < questions().length - 1 ? 'Siguiente' : 'Ver resultados') : 'Comprobar'"
+        [disabled]="!selectedOption()"
+        [backgroundColor]="isAnswered() ? theme.secondary : theme.primary"
+        [darkColor]="isAnswered() ? theme.secondaryDark : theme.primaryDark"
+        [textColor]="isAnswered() ? theme.onBackground : '#FFFFFF'"
+        (tapped)="isAnswered() ? nextQuestion() : checkAnswer()"
+      />
+    </div>
+  }
+</ion-content>

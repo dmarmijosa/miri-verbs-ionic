@@ -1,0 +1,162 @@
+.onboarding-content {
+  --background: #F6FAFE;
+}
+
+.onboarding-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 16px 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.onboarding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.brand {
+  font-family: 'Rubik', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #0040E0;
+  margin: 0;
+}
+
+.skip-btn {
+  background: none;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #434656;
+  cursor: pointer;
+}
+
+.slide-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 32px 0;
+}
+
+.slide {
+  width: 100%;
+}
+
+.slide--center {
+  text-align: center;
+}
+
+.mascot {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 24px;
+}
+
+.display {
+  font-family: 'Rubik', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #171C1F;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.body-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  color: #434656;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.video-card {
+  margin-top: 24px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #002994, #0040E0);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-card__overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: white;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.video-card__play {
+  font-size: 64px;
+}
+
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border: 1.5px solid #EAEEF2;
+  border-radius: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.goal-item--selected {
+  border-color: #0040E0;
+  background: rgba(0, 64, 224, 0.05);
+}
+
+.goal-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #C4C5D9;
+  flex-shrink: 0;
+}
+
+.goal-radio--checked {
+  border-color: #0040E0;
+  background: #0040E0;
+  box-shadow: inset 0 0 0 3px white;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #C4C5D9;
+  transition: all 200ms;
+}
+
+.dot--active {
+  width: 24px;
+  background: #0040E0;
+}

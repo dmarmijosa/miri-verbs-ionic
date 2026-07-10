@@ -1,0 +1,145 @@
+.verbs-toolbar {
+  --background: #F6FAFE;
+  .toolbar-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 8px;
+  }
+}
+
+.verbs-content { --background: #F6FAFE; }
+
+.verbs-wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-bar {
+  --background: white;
+  --border-radius: 12px;
+  padding: 0;
+}
+
+.sublevel-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.sublevel-pill {
+  min-width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  border: 2px solid #EAEEF2;
+  background: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sublevel-pill--selected {
+  border-color: #0040E0;
+  background: #0040E0;
+  color: white;
+}
+
+.sublevel-pill--completed:not(.sublevel-pill--selected) {
+  border-color: #FDD400;
+  background: rgba(253, 212, 0, 0.15);
+}
+
+.sublevel-pill--locked { opacity: 0.5; }
+
+.loading { display: flex; justify-content: center; padding: 32px; }
+
+.verb-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+
+.verb-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1.5px solid #EAEEF2;
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.verb-infinitive {
+  font-weight: 700;
+  font-size: 15px;
+  display: block;
+}
+
+.verb-spanish {
+  font-size: 13px;
+  color: #434656;
+  background: #EAEEF2;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.verb-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: #434656;
+  text-align: right;
+}
+
+.verb-detail {
+  padding: 24px;
+  background: #F6FAFE;
+
+  h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 28px;
+    margin: 16px 0 4px;
+    text-align: center;
+  }
+}
+
+.verb-detail__handle {
+  width: 40px; height: 4px;
+  background: #D6DADE;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+.verb-detail__spanish {
+  text-align: center;
+  color: #434656;
+  margin-bottom: 20px;
+}
+
+.conjugation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  label { font-size: 11px; color: #434656; display: block; }
+  span { font-weight: 700; font-size: 14px; }
+}
+
+.example-box {
+  background: white;
+  border: 1.5px solid #EAEEF2;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+
+  .example-en { font-style: italic; margin: 0 0 8px; }
+  .example-es { color: #434656; font-size: 14px; margin: 0; }
+}

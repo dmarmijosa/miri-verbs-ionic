@@ -1,0 +1,24 @@
+<ion-content class="waiting-content">
+  <div class="waiting-wrapper">
+    <div class="pulse-rings">
+      <div class="pulse-ring pulse-ring--1"></div>
+      <div class="pulse-ring pulse-ring--2"></div>
+      <div class="pulse-ring pulse-ring--3"></div>
+      <img [src]="opponentAvatar()" alt="Opponent" class="opponent-avatar" />
+    </div>
+
+    <h2>Esperando a {{ opponentName() }}</h2>
+    <p>El reto ha sido enviado...</p>
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+
+    @if (canCancel()) {
+      <app-tactile-button
+        text="Cancelar reto"
+        [backgroundColor]="theme.error"
+        [darkColor]="theme.errorDark"
+        [isSecondary]="true"
+        (tapped)="cancel()"
+      />
+    }
+  </div>
+</ion-content>

@@ -1,0 +1,136 @@
+<ion-menu contentId="home-content" side="end">
+  <ion-content class="menu-content">
+    <div class="menu-header">
+      <img [src]="profile()?.avatarUrl" alt="Avatar" class="menu-avatar" />
+      <h2>{{ profile()?.fullName }}</h2>
+      <p>{{ profile()?.email }}</p>
+    </div>
+
+    <div class="menu-stats card">
+      <h3>Estadísticas PvP</h3>
+      <div class="stats-grid">
+        <div><span class="stat-num">{{ battleStats()?.wins ?? 0 }}</span><span>Victorias</span></div>
+        <div><span class="stat-num">{{ battleStats()?.losses ?? 0 }}</span><span>Derrotas</span></div>
+        <div><span class="stat-num">{{ battleStats()?.abandons ?? 0 }}</span><span>Abandonos</span></div>
+        <div><span class="stat-num">{{ battleStats()?.winStreak ?? 0 }}</span><span>Racha</span></div>
+      </div>
+    </div>
+
+    <button type="button" class="menu-action" (click)="showAvatarPicker.set(true)">
+      <ion-icon name="person"></ion-icon> Cambiar avatar
+    </button>
+    <button type="button" class="menu-action" (click)="logout()">
+      <ion-icon name="log-out"></ion-icon> Cerrar sesión
+    </button>
+    <button type="button" class="menu-action menu-action--danger" (click)="deleteAccount()">
+      <ion-icon name="trash"></ion-icon> Eliminar cuenta
+    </button>
+  </ion-content>
+</ion-menu>
+
+<ion-header>
+  <ion-toolbar class="home-toolbar">
+    <div class="header-row">
+      <button type="button" class="avatar-btn" (click)="showAvatarPicker.set(true)">
+        <img [src]="profile()?.avatarUrl" alt="Avatar" />
+      </button>
+      <div class="greeting">
+        <h1>{{ greeting }}</h1>
+        <p>Continúa tu camino de aprendizaje</p>
+      </div>
+      <ion-menu-button></ion-menu-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="home-content" class="home-content">
+  <div class="home-wrapper">
+    <!-- Streak Card -->
+    <div class="card streak-card">
+      <div class="streak-header">
+        <ion-icon name="flame" class="streak-icon"></ion-icon>
+        <div>
+          <h3>{{ profile()?.streakDays ?? 0 }} días de racha 🔥</h3>
+          <p>¡Sigue practicando cada día!</p>
+        </div>
+      </div>
+      <app-squishy-progress-bar [value]="0.7" />
+    </div>
+
+    <!-- Video Card -->
+    <button type="button" class="card action-card" (click)="openVideo()">
+      <ion-icon name="videocam" class="action-icon action-icon--blue"></ion-icon>
+      <div>
+        <h3>Video de presentación</h3>
+        <p>Conoce la metodología Miri verbs</p>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+    </button>
+
+    <!-- TikTok Card -->
+    <button type="button" class="card action-card" (click)="openTikTok()">
+      <ion-icon name="logo-tiktok" class="action-icon action-icon--pink"></ion-icon>
+      <div>
+        <h3>{{ appConfig()?.tiktokName }}</h3>
+        <p>Síguenos en TikTok</p>
+      </div>
+      <ion-icon name="chevron-forward"></ion-icon>
+    </button>
+
+    <!-- Learning Path -->
+    <h2 class="section-title">Tu camino de aprendizaje</h2>
+
+    @for (unit of units; track unit.level) {
+      <button
+        type="button"
+        class="card unit-card"
+        [class.unit-card--locked]="!isLevelUnlocked(unit.level)"
+        (click)="openUnit(unit.level, unit.title)"
+      >
+        <div class="unit-icon" [style.background]="unit.color + '20'" [style.color]="unit.color">
+          <ion-icon [name]="unitIcons[unit.icon]"></ion-icon>
+        </div>
+        <div class="unit-info">
+          <h3>{{ unit.title }}</h3>
+          <p>{{ unit.desc }}</p>
+          <app-squishy-progress-bar
+            [value]="getLevelPercentage(unit.level) / 100"
+            [progressColors]="[unit.color, unit.color + 'AA']"
+            [barHeight]="10"
+          />
+          <span class="unit-progress">{{ getLevelPercentage(unit.level) }}% completado</span>
+        </div>
+        @if (!isLevelUnlocked(unit.level)) {
+          <ion-icon name="lock-closed" class="lock-icon"></ion-icon>
+        } @else {
+          <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+        }
+      </button>
+    }
+
+    <footer class="footer">
+      <p>© 2026 Miriverbs — Todos los derechos reservados</p>
+    </footer>
+  </div>
+
+  <app-online-friends-fab />
+</ion-content>
+
+<!-- Avatar Picker Modal -->
+<ion-modal [isOpen]="showAvatarPicker()" (didDismiss)="showAvatarPicker.set(false)">
+  <ng-template>
+    <div class="avatar-picker">
+      <div class="avatar-picker__handle"></div>
+      <h2>Elige tu mascota</h2>
+      <div class="avatar-grid">
+        @for (avatar of avatars; track avatar.path) {
+          <button type="button" class="avatar-option" (click)="selectAvatar(avatar.path)">
+            <img [src]="avatar.path" [alt]="avatar.name" />
+            <span>{{ avatar.name }}</span>
+          </button>
+        }
+      </div>
+      <app-tactile-button text="Cerrar" [isSecondary]="true" (tapped)="showAvatarPicker.set(false)" />
+    </div>
+  </ng-template>
+</ion-modal>

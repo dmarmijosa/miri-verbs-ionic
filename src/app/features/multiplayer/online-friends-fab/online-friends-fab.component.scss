@@ -1,0 +1,75 @@
+.arena-fab {
+  --background: #0040E0;
+  --box-shadow: 0 4px 12px rgba(0, 64, 224, 0.4);
+  width: auto;
+  --border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.arena-sheet { --background: #F6FAFE; }
+
+.arena-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 16px 8px;
+
+  h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    margin: 0;
+  }
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #434656;
+}
+
+.loading { display: flex; justify-content: center; padding: 32px; }
+
+.player-list { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border: 1.5px solid #EAEEF2;
+  border-radius: 16px;
+  padding: 12px;
+
+  app-tactile-button { width: 80px; flex-shrink: 0; }
+}
+
+.player-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.player-info { flex: 1; display: flex; flex-direction: column; }
+.player-name { font-weight: 700; font-size: 14px; }
+
+.player-status {
+  font-size: 11px;
+  text-transform: capitalize;
+  &.status--online { color: #2ECC71; }
+  &.status--away { color: #FDD400; }
+  &.status--offline { color: #434656; }
+}
+
+.request-badge {
+  font-size: 11px;
+  color: #0040E0;
+  background: rgba(0, 64, 224, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.empty-text { text-align: center; color: #434656; padding: 24px; }

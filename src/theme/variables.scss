@@ -1,2 +1,33 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// Miriverbs — Stitch Kinetic Ionic Theme
+
+:root {
+  --ion-color-primary: #0040E0;
+  --ion-color-primary-rgb: 0, 64, 224;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #0038c5;
+  --ion-color-primary-tint: #1a53e3;
+
+  --ion-color-secondary: #FDD400;
+  --ion-color-secondary-rgb: 253, 212, 0;
+  --ion-color-secondary-contrast: #171C1F;
+  --ion-color-secondary-contrast-rgb: 23, 28, 31;
+  --ion-color-secondary-shade: #dfbb00;
+  --ion-color-secondary-tint: #fdd81a;
+
+  --ion-color-tertiary: #2ECC71;
+  --ion-color-tertiary-rgb: 46, 204, 113;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #28b463;
+  --ion-color-tertiary-tint: #43d17f;
+
+  --ion-color-success: #2ECC71;
+  --ion-color-warning: #FDD400;
+  --ion-color-danger: #BA1A1A;
+
+  --ion-background-color: #F6FAFE;
+  --ion-text-color: #171C1F;
+
+  --ion-font-family: 'Plus Jakarta Sans', sans-serif;
+}

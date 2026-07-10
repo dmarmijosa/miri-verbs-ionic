@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar class="battle-toolbar">
+    <div class="battle-header">
+      <span class="timer" [class.timer--urgent]="timeLeft() <= 10">⏱ {{ timeLeft() }}s</span>
+      <span>⚔️ Duelo PvP</span>
+      <span class="score">Tú: {{ myScore() }}</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="battle-content">
+  @if (phase() === 'done') {
+    <div class="battle-results">
+      <h1>{{ won ? '¡Victoria!' : 'Derrota' }}</h1>
+      <div class="stats-compare">
+        <div class="stat-box">
+          <span class="stat-label">Tú</span>
+          <span class="stat-value">{{ myScore() }}</span>
+        </div>
+        <span class="vs">VS</span>
+        <div class="stat-box">
+          <span class="stat-label">Rival</span>
+          <span class="stat-value">{{ rivalScore() }}</span>
+        </div>
+      </div>
+      <app-tactile-button text="Volver al Mapa" (tapped)="goHome()" />
+    </div>
+  } @else if (currentQ; as q) {
+    <div class="battle-wrapper">
+      <app-squishy-progress-bar [value]="progress" [progressColors]="['#BA1A1A', '#FF6B6B']" />
+      <div class="question-card">
+        <p>{{ q.text }}</p>
+      </div>
+      <div class="options">
+        @for (opt of q.options; track opt) {
+          <button
+            type="button"
+            class="option-btn"
+            [class.option-btn--selected]="selectedOption() === opt && !isAnswered()"
+            [class.option-btn--correct]="isAnswered() && opt === q.correct"
+            [class.option-btn--wrong]="isAnswered() && opt === selectedOption() && opt !== q.correct"
+            (click)="selectOption(opt)"
+          >{{ opt }}</button>
+        }
+      </div>
+      <app-tactile-button
+        [text]="isAnswered() ? 'Siguiente' : 'Responder'"
+        [disabled]="!selectedOption()"
+        (tapped)="isAnswered() ? next() : submit()"
+      />
+    </div>
+  }
+</ion-content>
